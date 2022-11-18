@@ -1,0 +1,35 @@
+function getCal() {
+ var cal = CalendarApp.getCalendarById("c_haij6su6ms00671m8f4ibkfqf8@group.calendar.google.com");
+ var events = cal.getEvents(new Date("11/15/2022 12:00 AM"),new Date("11/18/2022 11:59 PM"));
+ var sheetToWriteId = "1GHnhaPM33bFHo6oD4dq1K6IlrR9ISuHgr7i_fCIsQ5s/edit#gid=0";
+ var sheetname="Export Raw";
+ 
+ for (var i=0; i<events.length;i++)
+ {
+   Logger.log(i);
+  var guests = events[i].getGuestList();
+  //var guestEmails;
+    var guestEmails =getEmailsFromArray(guests)
+    Logger.log(guestEmails);
+
+    var startTime=events[i].getStartTime();
+    Logger.log(startTime);
+
+    var endTime=events[i].getEndTime();
+    Logger.log(endTime);
+
+    var name= events[i].getTitle();
+    Logger.log(name);
+  }
+    
+ }
+
+
+function getEmailsFromArray(guestsArray){
+var guestEmails = [];
+for (var i=0;i<guestsArray.length;i++) {
+  //Logger.log(i);
+  guestEmails.push(guestsArray[i].getEmail());
+  //Logger.log(guestEmails[i]);
+}
+return guestEmails; }
